@@ -1,8 +1,11 @@
 package com.shruti.AssetFlow.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shruti.AssetFlow.entities.enums.DepartmentStatus;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "departments")
@@ -27,4 +30,8 @@ public class Department {
     @Builder.Default
     @Column(nullable = false)
     private DepartmentStatus status = DepartmentStatus.ACTIVE;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "department")
+    private List<Employee> employees;
 }
